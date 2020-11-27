@@ -1,0 +1,12 @@
+{
+  "captureHeaders" : {
+    "Accept" : { },
+    "Content-Type" : {
+      "caseInsensitive" : true
+    }
+  },
+  "outputFormat" : "FULL",
+  "persist" : false,
+  "repeatsAsScenarios" : false
+}
+

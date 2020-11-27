@@ -1,0 +1,9 @@
+{
+    "request": {
+        "method": "POST",
+        "urlPattern": "/.*"
+    },
+    "response": {
+        "proxyBaseUrl" : "http://ams9gen11ls.amsit.dev:40019/"
+    }
+}

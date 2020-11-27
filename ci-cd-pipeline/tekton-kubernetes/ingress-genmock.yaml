@@ -1,0 +1,15 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+ annotations:
+ name: genmock
+ namespace: env-dev
+spec:
+ rules:
+  - host: env-dev.amsit.dev
+    http:
+      paths:
+        - backend:
+            serviceName: genmock
+            servicePort: 8089
+          path: /__admin
