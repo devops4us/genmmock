@@ -23,6 +23,9 @@ spec:
             value: "MOCK"
           - name: PROXYPORT
             value: "8089"
+        volumeMounts:
+          - name: mappings
+            mountPath: "/home/genmock/config"        
         imagePullPolicy: Always       
         ports:
         - containerPort: 8089
@@ -34,6 +37,10 @@ spec:
       restartPolicy: "Always"      
       imagePullSecrets:
         - name: nexuscred
+      volumes:
+         - name: mappings
+           configMap: 
+              name: genmock-mappings
 ---
 apiVersion: v1
 kind: Service

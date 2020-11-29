@@ -7,13 +7,17 @@ if "%1"=="build" (
 	docker login ams9jen01ls.amsit.dev:80 -u admin -p Quook2dn
 	ECHO if necessary, add "insecure-registries": ["ams9jen01ls.amsit.dev:80"] to Docker config
 	docker push ams9jen01ls.amsit.dev:80/genmock:latest
+	@echo off
 )
 
 if "%1"=="mock" (
 	@echo on
+	kubectl delete configmap genmock-mappings -n env-dev
+	kubectl create configmap genmock-mappings --from-file=requestmappings.json -n env-dev	
 	kubectl delete deployment genmock-app -n env-dev
 	kubectl apply -f ci-cd-pipeline\tekton-kubernetes\deploy-mock.yaml -n env-dev
 	kubectl expose deployment genmock-app --name=genmock -n env-dev
+	@echo off
 )
 
 if "%1"=="proxy" (
@@ -21,9 +25,8 @@ if "%1"=="proxy" (
 	kubectl delete deployment genmock-app -n env-dev
 	kubectl apply -f ci-cd-pipeline\tekton-kubernetes\deploy-proxy.yaml -n env-dev
 	kubectl expose deployment genmock-app --name=genmock -n env-dev
+	@echo off
 )
-
-
 
 if "%1"=="" (
 	@echo "usage: build-run-amsdev build|mock|proxy"

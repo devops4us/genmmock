@@ -62,11 +62,11 @@ public class GenMock
 		    // load request mappings from file "./requestmappings.json and send to server"
 			try {
 				new RestClient(String.format("http://localhost:%s/__admin/mappings/import", port))
-				.postJson(new File("./requestmappings.json"));
+				.postJson(new File("./config/requestmappings.json"));
 				System.out.format("GenMock MOCK started on port %s \n", port);
 			} catch (Exception e) {
 				e.printStackTrace();
-				exitError(String.format("unable to load file ./requestmappings.json: %s",e.getMessage()));
+				exitError(String.format("unable to load file ./config/requestmappings.json: %s",e.getMessage()));
 			}			
 		}
 		else exitError(String.format("not a valid command: %s",command));
