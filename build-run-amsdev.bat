@@ -9,8 +9,22 @@ if "%1"=="build" (
 	docker push ams9jen01ls.amsit.dev:80/genmock:latest
 )
 
-if "%1"=="deploy" (
+if "%1"=="mock" (
 	@echo on
-	kubectl apply -f ci-cd-pipeline\tekton-kubernetes\deploy-genmock.yaml -n env-dev
+	kubectl delete deployment genmock-app -n env-dev
+	kubectl apply -f ci-cd-pipeline\tekton-kubernetes\deploy-mock.yaml -n env-dev
 	kubectl expose deployment genmock-app --name=genmock -n env-dev
+)
+
+if "%1"=="proxy" (
+	@echo on
+	kubectl delete deployment genmock-app -n env-dev
+	kubectl apply -f ci-cd-pipeline\tekton-kubernetes\deploy-proxy.yaml -n env-dev
+	kubectl expose deployment genmock-app --name=genmock -n env-dev
+)
+
+
+
+if "%1"=="" (
+	@echo "usage: build-run-amsdev build|mock|proxy"
 )

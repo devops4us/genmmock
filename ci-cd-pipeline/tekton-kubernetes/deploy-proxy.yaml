@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: genmock-app
+  labels:
+    app: genmock-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: genmock-app
+  template:
+    metadata:
+      labels:
+        app: genmock-app
+    spec:
+      terminationGracePeriodSeconds: 60
+      containers:
+      - name: genmock-app
+        image: ams9jen01ls.amsit.dev:80/genmock:latest
+        env:
+          - name: COMMAND
+            value: "PROXY"
+          - name: PROXYPORT
+            value: "8089"
+          - name: PROXYSOURCE
+            value: "/.*"
+          - name: PROXYTARGET
+            value: "http://ams9gen11ls.amsit.dev:40019/"
+        imagePullPolicy: Always       
+        ports:
+        - containerPort: 8089
+        resources:
+          limits:
+            cpu: 800m
+          requests:
+            cpu: 400m 
+      restartPolicy: "Always"      
+      imagePullSecrets:
+        - name: nexuscred
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: genmock
+spec:
+  selector:
+    app: genmock-app
+  ports:
+    - protocol: TCP
+      port: 8089
+      targetPort: 8089
+         
+
+         

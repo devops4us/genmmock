@@ -1,4 +1,4 @@
-##genmock: simulate SOAP Reqests/Responses to CA-GEN EESSI Service
+##GenMock: mock GEN SOAP requests
 
 #Build
 
@@ -10,13 +10,22 @@ build-run-amsdev.bat build
 ```
 
 
-#Deploy
+#Deploy as proxy
 
 From the project root dir, run the following in a Windows shell. This will deploy the GenMock server to the AMS K8S cluster in namespace `env-dev`. 
 
 ``` 
-build-run-amsdev.bat deploy
+build-run-amsdev.bat proxy
 ```
+
+#Deploy as mock
+
+From the project root dir, run the following in a Windows shell. This will deploy the GenMock server to the AMS K8S cluster in namespace `env-dev`. 
+
+``` 
+build-run-amsdev.bat mock
+```
+
 
 #Test
 

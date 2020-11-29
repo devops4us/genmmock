@@ -3,8 +3,9 @@
 set -xe
 ls -l
 
+echo "$COMMAND"
 echo "$PROXYPORT"
 echo "$PROXYSOURCE"
 echo "$PROXYTARGET"
 
-java -classpath "wiremock.jar:./libs/*" com.ibm.amsit.eessi.GenMock "$PROXYPORT" "$PROXYSOURCE" "$PROXYTARGET"
+java -classpath "wiremock.jar:./libs/*" com.ibm.amsit.eessi.GenMock "$COMMAND" "$PROXYPORT" "$PROXYSOURCE" "$PROXYTARGET"

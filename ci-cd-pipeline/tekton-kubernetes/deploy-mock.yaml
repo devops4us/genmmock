@@ -19,12 +19,10 @@ spec:
       - name: genmock-app
         image: ams9jen01ls.amsit.dev:80/genmock:latest
         env:
+          - name: COMMAND
+            value: "MOCK"
           - name: PROXYPORT
             value: "8089"
-          - name: PROXYSOURCE
-            value: "/.*"
-          - name: PROXYTARGET
-            value: "http://ams9gen11ls.amsit.dev:40019/"
         imagePullPolicy: Always       
         ports:
         - containerPort: 8089
